@@ -1,0 +1,250 @@
+/* 荔枝荟 - 全局样式 */
+page {
+  background-color: #f8f9fa;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif;
+  font-size: 28rpx;
+  color: #333;
+  box-sizing: border-box;
+}
+
+/* 主色调变量 (通过class实现) */
+.theme-green { color: #2d6a4f; }
+.theme-red { color: #c1292e; }
+.bg-green { background-color: #2d6a4f; }
+.bg-red { background-color: #c1292e; }
+
+/* 通用卡片 */
+.card {
+  background: #fff;
+  border-radius: 16rpx;
+  padding: 24rpx;
+  margin: 16rpx 24rpx;
+  box-shadow: 0 2rpx 12rpx rgba(0,0,0,0.06);
+}
+
+/* 网格布局 */
+.grid {
+  display: flex;
+  flex-wrap: wrap;
+  padding: 16rpx;
+}
+.grid-item {
+  width: calc(50% - 24rpx);
+  margin: 12rpx;
+}
+
+/* 菜品卡片 */
+.dish-card {
+  background: #fff;
+  border-radius: 16rpx;
+  overflow: hidden;
+  box-shadow: 0 4rpx 16rpx rgba(0,0,0,0.08);
+  transition: all 0.3s;
+}
+.dish-card:active {
+  transform: scale(0.97);
+}
+.dish-card .dish-img {
+  width: 100%;
+  height: 240rpx;
+  object-fit: cover;
+  background: #f0f0f0;
+}
+.dish-card .dish-img-placeholder {
+  width: 100%;
+  height: 240rpx;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: linear-gradient(135deg, #e8f5e9 0%, #c8e6c9 100%);
+  font-size: 64rpx;
+}
+.dish-card .dish-info {
+  padding: 16rpx 20rpx;
+}
+.dish-card .dish-name {
+  font-size: 30rpx;
+  font-weight: 600;
+  color: #333;
+  margin-bottom: 8rpx;
+}
+.dish-card .dish-price {
+  font-size: 28rpx;
+  color: #c1292e;
+  font-weight: 500;
+}
+
+/* Tab 切换 */
+.tab-bar {
+  display: flex;
+  background: #fff;
+  border-bottom: 1rpx solid #eee;
+  position: sticky;
+  top: 0;
+  z-index: 10;
+}
+.tab-item {
+  flex: 1;
+  text-align: center;
+  padding: 24rpx 0;
+  font-size: 30rpx;
+  color: #666;
+  position: relative;
+  transition: all 0.3s;
+}
+.tab-item.active {
+  color: #2d6a4f;
+  font-weight: 600;
+}
+.tab-item.active::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 60rpx;
+  height: 6rpx;
+  background: #2d6a4f;
+  border-radius: 3rpx;
+}
+
+/* 按钮 */
+.btn-primary {
+  background: linear-gradient(135deg, #2d6a4f 0%, #40916c 100%);
+  color: #fff;
+  border: none;
+  border-radius: 12rpx;
+  padding: 20rpx 48rpx;
+  font-size: 30rpx;
+  font-weight: 500;
+  text-align: center;
+}
+.btn-primary:active {
+  opacity: 0.85;
+}
+.btn-secondary {
+  background: #fff;
+  color: #2d6a4f;
+  border: 2rpx solid #2d6a4f;
+  border-radius: 12rpx;
+  padding: 18rpx 48rpx;
+  font-size: 30rpx;
+  font-weight: 500;
+  text-align: center;
+}
+.btn-danger {
+  background: #fff;
+  color: #c1292e;
+  border: 2rpx solid #c1292e;
+  border-radius: 12rpx;
+  padding: 18rpx 48rpx;
+  font-size: 30rpx;
+  text-align: center;
+}
+
+/* 输入框 */
+.input-field {
+  background: #f8f9fa;
+  border: 2rpx solid #e0e0e0;
+  border-radius: 12rpx;
+  padding: 20rpx 24rpx;
+  font-size: 28rpx;
+  width: 100%;
+  box-sizing: border-box;
+}
+.input-field:focus {
+  border-color: #2d6a4f;
+}
+
+/* 表单标签 */
+.form-label {
+  font-size: 28rpx;
+  color: #666;
+  margin-bottom: 12rpx;
+  display: block;
+}
+
+/* 空状态 */
+.empty-state {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 120rpx 0;
+}
+.empty-state .empty-icon {
+  font-size: 120rpx;
+  margin-bottom: 24rpx;
+}
+.empty-state .empty-text {
+  font-size: 28rpx;
+  color: #999;
+}
+
+/* loading */
+.loading-wrap {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 80rpx 0;
+}
+.loading-wrap .loading-text {
+  color: #999;
+  font-size: 26rpx;
+  margin-left: 16rpx;
+}
+
+/* 浮动操作按钮 */
+.fab {
+  position: fixed;
+  right: 40rpx;
+  bottom: 200rpx;
+  width: 100rpx;
+  height: 100rpx;
+  border-radius: 50%;
+  background: linear-gradient(135deg, #2d6a4f 0%, #40916c 100%);
+  color: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 52rpx;
+  box-shadow: 0 8rpx 24rpx rgba(45,106,79,0.35);
+  z-index: 100;
+}
+.fab:active {
+  transform: scale(0.92);
+}
+
+/* 价格标签 */
+.price-tag {
+  color: #c1292e;
+  font-weight: 600;
+}
+.price-tag::before {
+  content: '¥';
+  font-size: 0.8em;
+}
+
+/* 分割线 */
+.divider {
+  height: 1rpx;
+  background: #eee;
+  margin: 24rpx 0;
+}
+
+/* 标签 */
+.tag {
+  display: inline-block;
+  padding: 4rpx 16rpx;
+  border-radius: 8rpx;
+  font-size: 22rpx;
+  margin-right: 8rpx;
+}
+.tag-breakfast {
+  background: #fff3e0;
+  color: #e65100;
+}
+.tag-dinner {
+  background: #e8f5e9;
+  color: #2d6a4f;
+}

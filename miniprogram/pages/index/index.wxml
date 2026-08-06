@@ -1,0 +1,101 @@
+<view class="page-container">
+  <!-- 顶部标题 -->
+  <view class="header">
+    <view class="header-title">荔枝荟</view>
+    <view class="header-sub">家庭菜单</view>
+  </view>
+
+  <!-- 分类Tab -->
+  <view class="tab-bar">
+    <view 
+      wx:for="{{tabs}}" 
+      wx:key="key"
+      class="tab-item {{currentTab === item.key ? 'active' : ''}}"
+      data-tab="{{item.key}}"
+      bindtap="switchTab"
+    >
+      <text class="tab-emoji">{{item.emoji}}</text>
+      <text>{{item.name}}</text>
+    </view>
+  </view>
+
+  <!-- 搜索框 -->
+  <view class="search-bar">
+    <view class="search-input-wrap">
+      <text class="search-icon">🔍</text>
+      <input class="search-input" placeholder="搜索菜品（如：猪脚）" value="{{searchKeyword}}" bindinput="onSearchInput" confirm-type="search" />
+      <view wx:if="{{searchKeyword}}" class="search-clear" bindtap="clearSearch">✕</view>
+    </view>
+  </view>
+
+  <!-- 加载中 -->
+  <view wx:if="{{loading}}" class="loading-wrap">
+    <text class="loading-text">正在加载菜品...</text>
+  </view>
+
+  <!-- 菜品网格 -->
+  <view wx:elif="{{dishes.length > 0}}" class="grid">
+    <view class="grid-item" wx:for="{{dishes}}" wx:key="_id">
+      <view class="dish-card">
+        <!-- 有图片 -->
+        <image 
+          wx:if="{{item.imageBase64 || item.imageUrl || item.imageFileId}}" 
+          class="dish-img" 
+          src="{{item.imageBase64 || item.imageUrl || item.imageFileId}}" 
+          mode="scaleToFill"
+          data-url="{{item.imageBase64 || item.imageUrl || item.imageFileId}}"
+          bindtap="previewImage"
+        />
+        <!-- 无图片占位 -->
+        <view wx:else class="dish-img-placeholder">
+          <text>{{currentTab === 'breakfast' ? '🥐' : '🍲'}}</text>
+        </view>
+        <view class="dish-info">
+          <view class="dish-name-row">
+            <view class="dish-name">{{item.name}}</view>
+            <view class="cart-btn" data-id="{{item._id}}" data-name="{{item.name}}" data-price="{{item.price}}" data-category="{{item.category}}" bindtap="addToOrder">
+              <text class="cart-icon">🛒</text>
+            </view>
+          </view>
+          <view wx:if="{{item.price > 0}}" class="dish-price">¥{{item.price}}</view>
+          <view wx:else class="dish-price dish-price-empty">未定价</view>
+        </view>
+      </view>
+    </view>
+  </view>
+
+  <!-- 空状态 -->
+  <view wx:else class="empty-state">
+    <text class="empty-icon">{{searchKeyword ? '🔍' : '🍽️'}}</text>
+    <text wx:if="{{searchKeyword}}" class="empty-text">未找到「{{searchKeyword}}」相关菜品</text>
+    <block wx:else>
+      <text class="empty-text">暂无{{currentTab === 'breakfast' ? '早餐' : '晚餐'}}菜品</text>
+      <text class="empty-text">请到"管理"页面添加菜品</text>
+    </block>
+  </view>
+
+ <!-- 日期选择弹窗 -->
+  <view wx:if="{{showDatePicker}}" class="date-overlay" bindtap="cancelDatePicker">
+    <view class="date-modal" catchtap="stopPropagation">
+      <view class="date-modal-title">选择下单日期</view>
+      <view class="date-modal-dish">
+        <text class="date-modal-dish-name">{{pendingDish.name}}</text>
+        <text wx:if="{{pendingDish.price > 0}}" class="date-modal-dish-price">¥{{pendingDish.price}}</text>
+      </view>
+      <picker mode="date" value="{{pickerDate}}" bindchange="onPickerDateChange">
+        <view class="date-modal-picker">
+          <text class="date-modal-picker-icon">📅</text>
+          <text class="date-modal-picker-value">{{pickerDate || '选择日期'}}</text>
+          <text class="date-modal-picker-arrow">▼</text>
+        </view>
+      </picker>
+      <view class="date-modal-btns">
+        <view class="date-modal-cancel" bindtap="cancelDatePicker">取消</view>
+        <view class="date-modal-confirm" bindtap="confirmAddToOrder">确认加入</view>
+      </view>
+    </view>
+  </view>
+
+  <!-- 底部安全区 -->
+  <view style="height: 140rpx;"></view>
+</view>

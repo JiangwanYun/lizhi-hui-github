@@ -1,0 +1,86 @@
+<view class="page-container" bindtap="{{editMode ? 'exitEditMode' : ''}}">
+  <!-- 顶部周导航 -->
+  <view class="week-nav">
+    <view class="nav-arrow" bindtap="prevWeek">◀</view>
+    <view class="nav-label">{{weekLabel}}</view>
+    <view class="nav-arrow {{weekOffset >= 0 ? 'disabled' : ''}}" bindtap="nextWeek">▶</view>
+  </view>
+
+  <!-- 通知红点 -->
+  <view wx:if="{{newNotificationCount > 0 && !loading}}" class="noti-bar" bindtap="markNotificationsRead">
+    <text>🔔 {{newNotificationCount}} 条新点单通知 — 点击清除</text>
+  </view>
+
+  <!-- 加载中 -->
+  <view wx:if="{{loading}}" class="loading-wrap">
+    <text class="loading-text">加载中...</text>
+  </view>
+
+  <!-- 周报内容 -->
+  <view wx:if="{{!loading}}">
+    <view class="day-list">
+      <view wx:for="{{weekDays}}" wx:key="date" class="day-card {{item.isToday ? 'today' : ''}}">
+        <view class="day-header">
+          <view class="day-name">
+            <text class="day-label">{{item.dayName}}</text>
+            <text class="day-num">{{item.dayNum}}日</text>
+          </view>
+          <view wx:if="{{item.dayTotal > 0}}" class="day-total">¥{{item.dayTotal}}</view>
+          <view wx:if="{{item.isToday}}" class="today-badge">今天</view>
+        </view>
+
+        <view wx:if="{{item.breakfast.length > 0}}" class="meal-section">
+          <view class="meal-tag breakfast-tag">🌅 早餐</view>
+          <view class="dish-tags">
+            <view wx:for="{{item.breakfast}}" wx:for-item="dish" wx:key="dishId" 
+              class="dish-item {{editMode ? 'shake' : ''}} {{dish._selected ? 'selected' : ''}}"
+              catchtap="{{editMode ? 'onSelectDish' : ''}}"
+              bindlongpress="onDishLongPress"
+              data-date="{{item.date}}" data-meal="breakfast" data-dish-id="{{dish.dishId}}" data-dish-name="{{dish.name}}">
+              <text class="dish-name">{{dish.name}}<text wx:if="{{dish.price > 0}}" class="dish-price-small"> ¥{{dish.price}}</text></text>
+              <view wx:if="{{editMode}}" class="dish-delete" catchtap="onDeleteDish"
+                data-date="{{item.date}}" data-meal="breakfast" data-dish-id="{{dish.dishId}}" data-dish-name="{{dish.name}}">✕</view>
+            </view>
+          </view>
+        </view>
+
+        <view wx:if="{{item.dinner.length > 0}}" class="meal-section">
+          <view class="meal-tag dinner-tag">🌙 晚餐</view>
+          <view class="dish-tags">
+            <view wx:for="{{item.dinner}}" wx:for-item="dish" wx:key="dishId" 
+              class="dish-item {{editMode ? 'shake' : ''}} {{dish._selected ? 'selected' : ''}}"
+              catchtap="{{editMode ? 'onSelectDish' : ''}}"
+              bindlongpress="onDishLongPress"
+              data-date="{{item.date}}" data-meal="dinner" data-dish-id="{{dish.dishId}}" data-dish-name="{{dish.name}}">
+              <text class="dish-name">{{dish.name}}<text wx:if="{{dish.price > 0}}" class="dish-price-small"> ¥{{dish.price}}</text></text>
+              <view wx:if="{{editMode}}" class="dish-delete" catchtap="onDeleteDish"
+                data-date="{{item.date}}" data-meal="dinner" data-dish-id="{{dish.dishId}}" data-dish-name="{{dish.name}}">✕</view>
+            </view>
+          </view>
+        </view>
+
+        <view wx:if="{{item.breakfast.length === 0 && item.dinner.length === 0}}" class="no-record">
+          <text>暂无点单记录</text>
+        </view>
+      </view>
+    </view>
+
+    <view class="weekly-summary">
+      <view class="summary-label">本周总费用</view>
+      <view class="summary-amount">¥{{weeklyTotal}}</view>
+    </view>
+  </view>
+
+  <!-- 编辑模式操作栏 -->
+  <view wx:if="{{editMode}}" class="edit-actions">
+    <view class="edit-count" wx:if="{{editSelectedCount > 0}}">已选 {{editSelectedCount}} 项</view>
+    <view class="edit-btn batch-delete-btn" wx:if="{{editSelectedCount > 0}}" catchtap="batchDeleteSelected">🗑 删除选中</view>
+    <view class="edit-btn done-btn" catchtap="exitEditMode">✅ 完成</view>
+  </view>
+
+  <!-- 普通模式提示 -->
+  <view wx:if="{{!editMode}}" class="tip-bar">💡 长按菜品进入编辑模式</view>
+
+  <view style="height: calc(160rpx + env(safe-area-inset-bottom));"></view>
+</view>
+

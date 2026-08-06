@@ -1,0 +1,136 @@
+.page-container {
+  min-height: 100vh;
+  background: #f8f9fa;
+  padding: 16rpx;
+  padding-bottom: 200rpx;
+}
+
+.form-card {
+  background: #fff;
+  border-radius: 16rpx;
+  padding: 32rpx;
+  margin-bottom: 24rpx;
+  box-shadow: 0 2rpx 12rpx rgba(0,0,0,0.06);
+}
+
+.form-section {
+  margin-bottom: 32rpx;
+}
+.form-section:last-child {
+  margin-bottom: 0;
+}
+
+.form-label {
+  font-size: 28rpx;
+  color: #666;
+  margin-bottom: 16rpx;
+  display: block;
+  font-weight: 500;
+}
+
+/* 图片上传 */
+.image-upload {
+  width: 100%;
+  height: 360rpx;
+  border-radius: 12rpx;
+  overflow: hidden;
+  border: 2rpx dashed #d0d0d0;
+  cursor: pointer;
+}
+.image-upload:active {
+  border-color: #2d6a4f;
+}
+.preview-img {
+  width: 100%;
+  height: 360rpx;
+}
+.upload-placeholder {
+  width: 100%;
+  height: 360rpx;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  background: #fafafa;
+}
+.upload-icon {
+  font-size: 72rpx;
+  margin-bottom: 12rpx;
+}
+.upload-text {
+  font-size: 26rpx;
+  color: #999;
+}
+.upload-status {
+  font-size: 24rpx;
+  color: #2d6a4f;
+  margin-top: 8rpx;
+  text-align: center;
+}
+
+/* 输入框 */
+.input-field {
+  background: #f8f9fa;
+  border: 2rpx solid #e0e0e0;
+  border-radius: 12rpx;
+  padding: 20rpx 24rpx;
+  font-size: 30rpx;
+  width: 100%;
+  height: 80rpx;
+  line-height: 40rpx;
+  box-sizing: border-box;
+}
+
+.textarea-field {
+  background: #f8f9fa;
+  border: 2rpx solid #e0e0e0;
+  border-radius: 12rpx;
+  padding: 20rpx 24rpx;
+  font-size: 28rpx;
+  width: 100%;
+  height: 160rpx;
+  box-sizing: border-box;
+}
+
+/* 分类选择 */
+.category-select {
+  display: flex;
+  gap: 24rpx;
+}
+.category-btn {
+  flex: 1;
+  text-align: center;
+  padding: 20rpx;
+  border-radius: 12rpx;
+  border: 2rpx solid #e0e0e0;
+  font-size: 30rpx;
+  color: #666;
+  transition: all 0.2s;
+}
+.category-btn.active {
+  border-color: #2d6a4f;
+  background: #e8f5e9;
+  color: #2d6a4f;
+  font-weight: 600;
+}
+
+/* 保存按钮 */
+.save-area {
+  padding: 24rpx 0 60rpx;
+}
+.save-btn {
+  background: linear-gradient(135deg, #2d6a4f, #40916c);
+  color: #fff;
+  border: none;
+  border-radius: 12rpx;
+  padding: 24rpx 0;
+  font-size: 32rpx;
+  font-weight: 600;
+  width: 100%;
+}
+.save-btn:active {
+  opacity: 0.85;
+}
+.save-btn[disabled] {
+  opacity: 0.6;
+}

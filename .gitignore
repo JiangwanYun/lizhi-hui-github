@@ -1,0 +1,23 @@
+# 个人本地开发配置（含个人偏好设置，不应提交）
+project.private.config.json
+
+# 依赖目录
+node_modules/
+cloudfunctions/*/node_modules/
+
+# 云函数依赖锁文件（可按需保留，本项目云函数依赖简单，忽略）
+package-lock.json
+
+# 小程序编译缓存
+miniprogram_npm/
+dist/
+
+# 编辑器与系统文件
+.vscode/
+.idea/
+.DS_Store
+Thumbs.db
+
+# 日志与临时文件
+*.log
+*.tmp

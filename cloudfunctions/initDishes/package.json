@@ -1,0 +1,9 @@
+{
+  "name": "initDishes",
+  "version": "1.0.0",
+  "description": "初始化默认菜品数据",
+  "main": "index.js",
+  "dependencies": {
+    "wx-server-sdk": "~2.6.3"
+  }
+}

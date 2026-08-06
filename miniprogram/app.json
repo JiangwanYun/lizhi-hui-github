@@ -1,0 +1,44 @@
+{
+  "pages": [
+    "pages/index/index",
+    "pages/order/order",
+    "pages/weekly/weekly",
+    "pages/dish-manage/dish-manage",
+    "pages/dish-edit/dish-edit"
+  ],
+  "window": {
+    "backgroundTextStyle": "light",
+    "navigationBarBackgroundColor": "#2d6a4f",
+    "navigationBarTitleText": "荔枝荟",
+    "navigationBarTextStyle": "white",
+    "backgroundColor": "#f5f5f5"
+  },
+  "tabBar": {
+    "custom": true,
+    "color": "#999999",
+    "selectedColor": "#2d6a4f",
+    "backgroundColor": "#ffffff",
+    "list": [
+      {
+        "pagePath": "pages/index/index",
+        "text": "菜单"
+      },
+      {
+        "pagePath": "pages/order/order",
+        "text": "点单"
+      },
+      {
+        "pagePath": "pages/weekly/weekly",
+        "text": "周报"
+      },
+      {
+        "pagePath": "pages/dish-manage/dish-manage",
+        "text": "管理"
+      }
+    ]
+  },
+  "cloud": true,
+  "sitemapLocation": "sitemap.json",
+  "style": "v2",
+  "lazyCodeLoading": "requiredComponents"
+}

@@ -1,0 +1,63 @@
+<view class="page-container">
+  <view class="form-card card">
+    <!-- 图片上传 -->
+    <view class="form-section">
+      <text class="form-label">菜品图片</text>
+      <view class="image-upload" bindtap="chooseImage">
+        <image wx:if="{{imageLocalPath}}" class="preview-img" src="{{imageLocalPath}}" mode="aspectFill" />
+        <image wx:elif="{{imageBase64}}" class="preview-img" src="{{imageBase64}}" mode="aspectFill" />
+        <image wx:elif="{{imageFileId}}" class="preview-img" src="{{imageFileId}}" mode="aspectFill" />
+        <view wx:else class="upload-placeholder">
+          <text class="upload-icon">📷</text>
+          <text class="upload-text">点击上传图片</text>
+        </view>
+      </view>
+      <view wx:if="{{uploading}}" class="upload-status">图片处理中...</view>
+    </view>
+
+    <!-- 菜名 -->
+    <view class="form-section">
+      <text class="form-label">菜名 *</text>
+      <input class="input-field" placeholder="请输入菜名" value="{{name}}" bindinput="onNameInput" />
+    </view>
+
+    <!-- 分类 -->
+    <view class="form-section">
+      <text class="form-label">分类</text>
+      <view class="category-select">
+        <view 
+          wx:for="{{categoryOptions}}" 
+          wx:key="key"
+          class="category-btn {{category === item.key ? 'active' : ''}}"
+          bindtap="onCategoryChange"
+          data-index="{{index}}"
+        >
+          {{item.name}}
+        </view>
+      </view>
+    </view>
+
+    <!-- 价格 -->
+    <view class="form-section">
+      <text class="form-label">价格 (元)</text>
+      <input class="input-field" type="digit" placeholder="请输入价格（可选）" value="{{price}}" bindinput="onPriceInput" />
+    </view>
+
+    <!-- 描述 -->
+    <view class="form-section">
+      <text class="form-label">描述 (可选)</text>
+      <textarea class="textarea-field" placeholder="菜品描述..." value="{{description}}" bindinput="onDescInput" maxlength="200" />
+    </view>
+  </view>
+
+  <!-- 保存按钮 -->
+  <view class="save-area">
+    <button class="btn-primary save-btn" bindtap="saveDish" disabled="{{saving}}">
+      {{saving ? '保存中...' : (isEdit ? '更新菜品' : '添加菜品')}}
+    </button>
+  </view>
+
+  <!-- 隐藏的 canvas 用于图片压缩 -->
+  <canvas canvas-id="_compressCanvas" style="width:400px;height:400px;position:fixed;left:-9999px;top:-9999px;"></canvas>
+
+</view>

@@ -1,0 +1,112 @@
+<view class="container">
+  <!-- 日期选择 -->
+  <view class="date-section">
+    <picker mode="date" value="{{selectedDate}}" bindchange="onDateChange">
+      <view class="date-picker-wrap">
+        <text class="date-text">📅 {{selectedDate}}</text>
+        <text class="date-picker-arrow">▼</text>
+      </view>
+    </picker>
+    <view class="date-actions">
+      <text wx:if="{{selectedDate !== today}}" class="back-today-btn" bindtap="backToToday">回到今天</text>
+      <text class="date-label">{{dateLabel}}</text>
+    </view>
+  </view>
+
+  <!-- 分类Tab -->
+  <view class="tabs">
+    <view
+      wx:for="{{tabs}}"
+      wx:key="key"
+      class="tab {{currentTab === item.key ? 'tab-active' : ''}}"
+      data-tab="{{item.key}}"
+      bindtap="switchTab"
+    >
+      <text>{{item.emoji}} {{item.name}}</text>
+    </view>
+  </view>
+
+  <!-- 当前日期菜品 -->
+  <view class="section-card">
+    <view class="section-header">
+      <text class="section-title">🛒 {{selectedDate === today ? '今日' : selectedDate}}菜品</text>
+      <view wx:if="{{todayDishes.length > 0}}" class="badge">{{todayDishes.length}}</view>
+    </view>
+
+    <view wx:if="{{todayDishes.length > 0}}" class="dish-list">
+      <view wx:for="{{todayDishes}}" wx:key="dishId" class="dish-row {{item.confirmed ? 'dish-confirmed' : ''}}">
+        <view class="dish-info">
+          <text class="dish-name">{{item.name}}</text>
+          <text wx:if="{{item.price > 0}}" class="dish-price">¥{{item.price}}</text>
+          <text wx:else class="dish-price-empty">未定价</text>
+        </view>
+        <view wx:if="{{item.confirmed}}" class="dish-status">
+          <text class="confirmed-badge">✅ 已下单</text>
+        </view>
+        <view wx:elif="{{!item.confirmed}}" class="dish-actions">
+          <view class="remove-btn" data-index="{{index}}" bindtap="removeTodayDish">✕</view>
+        </view>
+      </view>
+    </view>
+
+    <view wx:else class="empty-hint">
+      <text>暂无{{selectedDate === today ? '今日' : selectedDate}}{{currentTab === 'breakfast' ? '早餐' : '晚餐'}}菜品</text>
+      <text class="empty-sub">请在菜单页点击 🛒 图标加入点单</text>
+    </view>
+  </view>
+
+  <!-- 确认下单 + 取消预定 按钮 -->
+  <view wx:if="{{hasPending}}" class="confirm-wrap">
+    <view class="confirm-info">
+      <text class="confirm-count">共 {{todayDishes.length}} 道菜</text>
+      <text class="confirm-total">合计: ¥{{todayTotal}}</text>
+    </view>
+    <view class="confirm-actions">
+      <button class="confirm-btn" bindtap="confirmOrder" disabled="{{confirming}}">
+        {{confirming ? '确认中...' : '✅ 确认下单'}}
+      </button>
+      <button class="cancel-preorder-btn" bindtap="cancelPreOrder">取消预定</button>
+    </view>
+  </view>
+
+  <!-- 分割线 -->
+  <view class="divider"></view>
+
+  <!-- 历史日志 -->
+  <view class="section-card">
+    <view class="section-header">
+      <text class="section-title">📋 历史日志</text>
+    </view>
+    <view class="date-picker-row">
+      <picker mode="date" value="{{historyDate}}" bindchange="onHistoryDateChange">
+        <view class="date-picker-btn">
+          <text>📅 {{historyDate || '选择日期查询'}}</text>
+          <text class="picker-arrow">▼</text>
+        </view>
+      </picker>
+      <view wx:if="{{historyDate}}" class="clear-btn" bindtap="clearHistoryDate">清除</view>
+    </view>
+
+    <!-- 历史记录列表 -->
+    <view wx:if="{{historyOrders.length > 0}}">
+      <view wx:for="{{historyOrders}}" wx:key="date" class="history-card">
+        <view class="history-date-row">
+          <text class="history-date">{{item.date}}</text>
+          <text wx:if="{{item.mealType}}" class="history-meal-tag">{{item.mealType === 'breakfast' ? '🌅早餐' : '🌙晚餐'}}</text>
+          <text class="history-total">¥{{item.total}}</text>
+        </view>
+        <view class="history-dishes">
+          <text wx:for="{{item.dishes}}" wx:for-item="d" wx:key="dishId" class="history-dish">
+            {{d.name}}<text wx:if="{{d.price > 0}}" class="history-dish-price"> ¥{{d.price}}</text>
+          </text>
+        </view>
+      </view>
+    </view>
+
+    <view wx:elif="{{historyQueried}}" class="empty-hint">
+      <text>该日期无点单记录</text>
+    </view>
+  </view>
+
+  <view style="height:200rpx;"></view>
+</view>
