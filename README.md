@@ -1,6 +1,21 @@
-# 荔枝荟 · 家庭菜谱点单小程序
+﻿# 荔枝荟 · 家庭菜谱点单小程序
 
 一个基于 **微信小程序原生开发 + 微信云开发** 的家庭菜谱点单系统。家庭成员可以浏览菜单、在线点单、管理菜品，并自动生成每周消费周报，解决"今天吃什么"的家庭决策问题。
+
+## 📱 界面预览
+
+| 菜单浏览 | 在线点单 | 周报统计 |
+| :---: | :---: | :---: |
+| <img src="screenshots/menu.png" width="250" alt="菜单浏览"> | <img src="screenshots/order.png" width="250" alt="在线点单"> | <img src="screenshots/weekly.png" width="250" alt="周报统计"> |
+| 早餐 / 晚餐智能分组 + 同义词搜索 | 按日期点单，已下单状态实时跟踪 | 按日聚合明细，自动汇总周消费 |
+
+| 菜品管理 | 菜品编辑 | 点单通知 |
+| :---: | :---: | :---: |
+| <img src="screenshots/dish-manage.png" width="250" alt="菜品管理"> | <img src="screenshots/dish-edit.png" width="250" alt="菜品编辑"> | <img src="screenshots/weekly-notification.png" width="250" alt="点单通知"> |
+| 分类筛选 + 搜索，编辑 / 删除入口 | 图片上传、分类 / 价格 / 描述设置 | 新点单横幅提醒，创建者实时掌握 |
+
+<p align="center"><img src="screenshots/date-picker.png" width="250" alt="按日期查询历史订单"></p>
+<p align="center">📅 历史日志：按日期查询任意一天的点单记录</p>
 
 ## ✨ 功能特色
 
